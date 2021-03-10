@@ -1,25 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
+import {connect} from "react-redux";
+import {setData} from "./store/actions/main";
+import React from 'react';
+import TestCmp from "./TestCmp";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			data: '',
+		};
+	}
+
+	onChange = (e) => {
+		const value = e.target.value;
+		this.props.setData(value); // with matDispatchToProps
+		// this.props.dispatch({type: 'ADD_DATA', data: value}); // without matDispatchToProps
+		this.setState({
+			...this.state,
+			data: value,
+		});
+	}
+
+	render() {
+		return (
+			<div>
+				<input value={this.state.data} onChange={this.onChange}/>
+				<TestCmp/>
+			</div>
+		);
+	}
 }
 
-export default App;
+const mapStateToProps = (state) => {
+	return {
+		data: state.data,
+	}
+}
+const mapDispatchToProps = {setData}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(App)
