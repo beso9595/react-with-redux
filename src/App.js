@@ -1,4 +1,3 @@
-import './App.css';
 import {connect} from "react-redux";
 import {setData} from "./store/actions/main";
 import React from 'react';
