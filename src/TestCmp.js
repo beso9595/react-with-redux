@@ -17,7 +17,7 @@ class TestCmp extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		data: state.mainReducer.data,
+		data: state.main.data,
 	}
 }
 const mapDispatchToProps = {setData}

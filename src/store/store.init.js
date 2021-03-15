@@ -3,5 +3,5 @@ import {mainReducer} from "./reducers/main";
 
 
 export default createStore(combineReducers({
-	mainReducer,
+	main: mainReducer,
 }));
