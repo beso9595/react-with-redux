@@ -1,6 +1,6 @@
 import {MainActions} from "../actions/main";
 
-export const mainReducer = (state = [], action) => {
+export const mainReducer = (state = {data: ''}, action) => {
 	switch (action.type) {
 		case MainActions.ADD_DATA:
 			return {

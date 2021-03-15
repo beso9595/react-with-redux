@@ -1,45 +1,24 @@
-import {connect} from "react-redux";
-import {setData} from "./store/actions/main";
+import {useDispatch, useSelector} from "react-redux";
 import React from 'react';
 import TestCmp from "./TestCmp";
+import {dataSelector} from "./store/selectors/main";
 
-class App extends React.Component {
+const App = () => {
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			data: '',
-		};
-	}
+	const data = useSelector(dataSelector);
+	const dispatch = useDispatch();
 
-	onChange = (e) => {
+	const onChange = (e) => {
 		const value = e.target.value;
-		this.props.setData(value); // with matDispatchToProps
-		// this.props.dispatch({type: 'ADD_DATA', data: value}); // without matDispatchToProps
-		this.setState({
-			...this.state,
-			data: value,
-		});
+		dispatch({type: 'ADD_DATA', data: value});
 	}
 
-	render() {
-		return (
-			<div>
-				<input value={this.state.data} onChange={this.onChange}/>
-				<TestCmp/>
-			</div>
-		);
-	}
+	return (
+		<div>
+			<input value={data} onChange={onChange}/>
+			<TestCmp/>
+		</div>
+	);
 }
 
-const mapStateToProps = (state) => {
-	return {
-		data: state.data,
-	}
-}
-const mapDispatchToProps = {setData}
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(App)
+export default App;

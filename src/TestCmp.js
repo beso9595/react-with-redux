@@ -1,27 +1,16 @@
 import React from 'react';
-import {setData} from "./store/actions/main";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
+import {dataSelector} from "./store/selectors/main";
 
-class TestCmp extends React.Component {
+const TestCmp = () => {
 
-	render() {
-		const {data} = this.props;
-		return (
-			<div>
-				state: {data}
-			</div>
-		);
-	}
+	const data = useSelector(dataSelector);
+
+	return (
+		<div>
+			state: {data}
+		</div>
+	);
 }
 
-
-const mapStateToProps = (state) => {
-	return {
-		data: state.mainReducer.data,
-	}
-}
-const mapDispatchToProps = {setData}
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(TestCmp);
+export default TestCmp;
